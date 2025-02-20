@@ -1,0 +1,14 @@
+echo "---  
+- name: Prüfe, ob Apache läuft  
+  hosts: target_linux_servers  
+  become: true  
+  tasks:  
+    - name: Überprüfe Apache-Status  
+      service:  
+        name: apache2  # Oder "httpd" für CentOS/RHEL  
+        state: started  
+      register: apache_status  
+
+    - name: Zeige Apache-Status  
+      debug:  
+        msg: 'Apache läuft: {{ apache_status.state == "started" }}'" > check_apache.yml
