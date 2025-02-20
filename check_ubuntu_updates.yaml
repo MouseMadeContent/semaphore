@@ -1,0 +1,17 @@
+---
+- name: Überprüfe ausstehende Updates auf Ubuntu
+  hosts: target_linux_servers
+  become: true
+  tasks:
+    - name: Aktualisiere die Paketliste
+      apt:
+        update_cache: yes
+
+    - name: Liste ausstehende Updates auf
+      command: apt list --upgradable
+      register: updates
+      changed_when: false
+
+    - name: Zeige ausstehende Updates
+      debug:
+        msg: "{{ updates.stdout_lines }}"
