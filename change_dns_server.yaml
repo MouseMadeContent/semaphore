@@ -1,0 +1,17 @@
+---
+- name: Set custom DNS in systemd-resolved
+  hosts: target_linux_servers
+  become: yes
+  tasks:
+    - name: Update systemd-resolved DNS settings
+      lineinfile:
+        path: /etc/systemd/resolved.conf
+        regexp: "^#?DNS="
+        line: "DNS=8.8.8.8 8.8.4.4"
+      notify: Restart systemd-resolved
+
+  handlers:
+    - name: Restart systemd-resolved
+      systemd:
+        name: systemd-resolved
+        state: restarted
