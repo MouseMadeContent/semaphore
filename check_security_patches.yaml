@@ -1,0 +1,20 @@
+---
+- name: Check for pending security updates on Ubuntu
+  hosts: all
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Install unattended-upgrades package (if not installed)
+      ansible.builtin.apt:
+        name: unattended-upgrades
+        state: present
+
+    - name: List pending security updates
+      ansible.builtin.command: unattended-upgrade --dry-run --debug
+      register: security_updates
+      changed_when: false
+
+    - name: Show security updates
+      ansible.builtin.debug:
+        msg: "{{ security_updates.stdout_lines }}"
