@@ -1,0 +1,15 @@
+---
+- name: List all running processes on Ubuntu
+  hosts: all
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Get list of running processes
+      ansible.builtin.command: ps aux
+      register: running_processes
+      changed_when: false
+
+    - name: Show running processes
+      ansible.builtin.debug:
+        msg: "{{ running_processes.stdout_lines }}"
