@@ -1,6 +1,6 @@
 ---
-- name: Get current hostname from a specific host
-  hosts: "{{ target_host }}"
+- name: Get current hostname from target Linux servers
+  hosts: target_linux_servers
   gather_facts: no
   tasks:
     - name: Get the hostname
