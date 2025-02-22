@@ -5,4 +5,4 @@
   tasks:
     - name: Run Checkmk command to disable notifications
       command: >
-        su - monitoring -c 'echo "COMMAND [$(date +%s)] DISABLE_NOTIFICATIONS" > ~/tmp/run/live'
+        su - monitoring -c 'echo "COMMAND [$(date +%s)] DISABLE_NOTIFICATIONS"'
