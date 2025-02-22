@@ -5,7 +5,7 @@
   tasks:
     - name: Update notifications.mk to disable notifications
       replace:
-        path: "/omd/sites/monitoring/var/check_mk/wato/notifications.mk"
+        path: "/opt/omd/sites/monitoring/var/check_mk/wato/notifications.mk"
         regexp: '("active": )true'
         replace: '\1false'
       notify: Restart Checkmk
