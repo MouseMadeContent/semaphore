@@ -1,15 +1,8 @@
 ---
-- name: Disable notifications in Checkmk config file
+- name: Disable global notifications in Checkmk
   hosts: checkmk_server
   become: yes
   tasks:
-    - name: Update notifications.mk to disable notifications
-      replace:
-        path: "/opt/omd/sites/monitoring/etc/check_mk/conf.d/wato/notifications.mk"
-        regexp: '("active": )true'
-        replace: '\1false'
-      notify: Restart Checkmk
-
-  handlers:
-    - name: Restart Checkmk
-      command: omd restart mysite
+    - name: Run Checkmk command to disable notifications
+      command: >
+        su - monitoring -c 'echo "COMMAND [$(date +%s)] DISABLE_NOTIFICATIONS" > ~/tmp/run/live'
