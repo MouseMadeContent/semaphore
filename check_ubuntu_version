@@ -1,0 +1,8 @@
+---
+- name: Check Ubuntu Version
+  hosts: all  # Passe dies an deine Hostgruppe an
+  gather_facts: yes
+  tasks:
+    - name: Get Ubuntu version
+      debug:
+        msg: "Ubuntu Version: {{ ansible_distribution }} {{ ansible_distribution_version }}"
